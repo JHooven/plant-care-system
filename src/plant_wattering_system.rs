@@ -38,7 +38,7 @@ pub mod plant_watering_system
 
         pub fn new() -> Hygrometer
         {
-            Hygrometer { last_reading: 0 }
+            Hygrometer { last_reading: 0.0 }
         }
     }
 
@@ -62,10 +62,15 @@ pub mod plant_watering_system
             // PENDING: gpio code goes here.
             self.state = false;
         }
+
+        pub fn new() -> WaterSource
+        {
+            WaterSource { state: false }
+        }
     }
 
     // Plant
-    pub struct Plant<'plant_lifetime>
+    pub struct Plant
     {
         name: String,
         hygrometers: Vec<Hygrometer>,
@@ -74,13 +79,13 @@ pub mod plant_watering_system
         hygro_high_watter_mark: f32,
     }
 
-    impl<'plant_lifetime> Plant<'plant_lifetime>
+    impl Plant
     {
         // Name of the plant
-        fn name(&self) -> &String {&self.name}
-        fn hygrometers(&self) -> &Vec<Hygrometer> {&self.hygrometers}
-        fn water_sources(&self) -> &Vec<WaterSource> {&self.water_sources}
-        fn hygro_avg(&self) -> f32 
+        pub fn name(&self) -> &String {&self.name}
+        pub fn hygrometers(&self) -> &Vec<Hygrometer> {&self.hygrometers}
+        pub fn water_sources(&self) -> &Vec<WaterSource> {&self.water_sources}
+        pub fn hygro_avg(&self) -> f32 
         {
             let mut total: f32 = 0.0;
 
@@ -92,7 +97,7 @@ pub mod plant_watering_system
             total / (self.hygrometers.len() as f32)
         }
 
-        pub fn new(_name: String, hygros: &Vec<Hygrometer>, _water_sources: &Vec<WaterSource> ) -> Plant<'plant_lifetime>
+        pub fn new(_name: String, hygros: Vec<Hygrometer>, _water_sources: Vec<WaterSource> ) -> Plant
         {
             Plant
             {
@@ -106,19 +111,19 @@ pub mod plant_watering_system
 
     }
 
-    pub struct PlantController<'plant_controller_lifetime>
+    pub struct PlantController
     {
-        plants: Vec<&'plant_controller_lifetime mut Plant<'plant_controller_lifetime>>,   
+        plants: Vec<Plant>,   
         update_interval: i32,
     }
 
-    impl<'plant_controller_lifetime> PlantController <'plant_controller_lifetime>
+    impl PlantController 
     {
         pub fn start(&self)
         {
 
         }
-        pub fn addPlant(&mut self, plant: &'plant_controller_lifetime mut Plant)
+        pub fn addPlant(&mut self, plant: Plant)
         {
             self.plants.push(plant);
         }
@@ -151,21 +156,21 @@ pub mod plant_watering_system
             } 
         } 
         
-        pub fn new() -> PlantController<'plant_controller_lifetime>
+        pub fn new() -> PlantController
         {
-            let v : Vec<& mut Plant> = Vec::new();
+            let v : Vec<Plant> = Vec::new();
             
             PlantController { plants: v, update_interval: 5 }
         }
     }
 
     // PlanWateringSystem
-    pub struct PlantWatteringSystem<'system_lifetime>
+    pub struct PlantWatteringSystem
     {
-        plant_controller: PlantController<'system_lifetime>,
+        plant_controller: PlantController,
     }
 
-    impl<'system_lifetime> PlantWatteringSystem<'system_lifetime>
+    impl PlantWatteringSystem
     {
         pub fn checkUpdatePlants(&self)
         {
@@ -181,14 +186,14 @@ pub mod plant_watering_system
             });
         }
 
-        pub fn addPlant(&mut self, plant : &mut Plant)
+        pub fn addPlant(&mut self, plant : Plant)
         {
             self.plant_controller.addPlant(plant);
         }
 
-        pub fn new<'b>() -> PlantWatteringSystem<'b>
+        pub fn new() -> PlantWatteringSystem
         {
-            PlantWatteringSystem{plant_controller: PlantController::new::<'b>()}
+            PlantWatteringSystem{plant_controller: PlantController::new()}
         }
     }
 }

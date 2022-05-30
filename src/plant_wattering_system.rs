@@ -130,11 +130,17 @@ pub mod plant_watering_system
 
         pub fn update_plants(&mut self)
         {
+            println!("Updating plant states.");
+
             for plant in self.plants.iter_mut()
             {
+                println!("Checking plant: {}", plant.name());
+
                 // Check if the plant needs watering
                 if plant.hygro_avg() <= plant.hygro_low_watter_mark
                 {
+                    println!("Plant: {} hygro_avg: {} is below the low water mark.", plant.name(), plant.hygro_avg());
+                    
                     for water_source in plant.water_sources.iter_mut()
                     {
                         if !water_source.state
@@ -145,6 +151,8 @@ pub mod plant_watering_system
                 }
                 else if plant.hygro_avg() >= plant.hygro_high_watter_mark
                 {
+                    println!("Plant: {} hygro_avg: {} is below the high water mark.", plant.name(), plant.hygro_avg());
+
                     for water_source in plant.water_sources.iter_mut()
                     {
                         if water_source.state
@@ -172,18 +180,18 @@ pub mod plant_watering_system
 
     impl PlantWatteringSystem
     {
-        pub fn checkUpdatePlants(&self)
+        pub fn checkUpdatePlants(&mut self)
         {
-
+            self.plant_controller.update_plants();
         }
 
         pub fn start(&self)
         {
-            let mut timer : timer::Timer = timer::Timer::new();
+            // let mut timer : timer::Timer = timer::Timer::new();
 
-            let _guard = timer.schedule_with_delay(chrono::Duration::seconds(30), move || {
+            // let _guard = timer.schedule_with_delay(chrono::Duration::seconds(30), move || {
             
-            });
+            // });
         }
 
         pub fn addPlant(&mut self, plant : Plant)

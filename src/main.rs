@@ -33,5 +33,19 @@ fn main()
     
     plant_system.addPlant(plant);
 
-   plant_system.start();
+    plant_system.start();
+
+    let mut my_timer : timer::Timer = timer::Timer::new();
+
+    let _guard = my_timer.schedule_repeating(chrono::Duration::seconds(10), 
+       move || {
+        plant_system.checkUpdatePlants();
+      });
+
+    //plant_system.checkUpdatePlants();
+    
+    loop 
+    {
+        thread::sleep(Duration::from_secs(12));
+    }
 }

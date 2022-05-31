@@ -1,7 +1,7 @@
 
-use crate::PlantCareSystem::Device::Device;
-use crate::PlantCareSystem::Device::State;
-use super::Plant::Plant;
+use crate::plant_care_system::device::Device;
+use crate::plant_care_system::device::State;
+use super::plant::Plant;
 
 pub struct PlantController
 {
@@ -15,7 +15,7 @@ impl PlantController
     {
 
     }
-    pub fn addPlant(&mut self, plant: Plant)
+    pub fn add_plant(&mut self, plant: Plant)
     {
         self.plants.push(plant);
     }

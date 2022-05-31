@@ -1,6 +1,6 @@
 
-use super::Hygrometer::Hygrometer;
-use super::WaterSource::WaterSource;
+use super::hygrometer::Hygrometer;
+use super::water_source::WaterSource;
 pub struct Plant
 {
     pub name: String,

@@ -1,6 +1,6 @@
 
-use super::Device::Device;
-use super::Device::State;
+use super::device::Device;
+use super::device::State;
 
 pub struct WaterSource
 {

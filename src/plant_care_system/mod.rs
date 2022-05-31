@@ -1,11 +1,11 @@
 
-#[allow(unused_variables, unused_assignments, unused_imports)]
+#[allow(dead_code, unused_variables, unused_assignments, unused_imports)]
 
-pub mod PlantController;
-pub mod Hygrometer;
-pub mod WaterSource;
-pub mod Plant;
-pub mod Device;
+pub mod plant_controller;
+pub mod hygrometer;
+pub mod water_source;
+pub mod plant;
+pub mod device;
 
 extern crate rand;
 extern crate timer;
@@ -13,10 +13,10 @@ extern crate chrono;
 
 #[allow(unused_variables, unused_imports)]
 
-pub mod PlantCareSystem
+pub mod plant_care_system
 {
-    use super::PlantController::PlantController;
-    use super::Plant::Plant;
+    use super::plant_controller::PlantController;
+    use super::plant::Plant;
 
     // PlanWateringSystem
     pub struct PlantCareSystem
@@ -26,7 +26,7 @@ pub mod PlantCareSystem
 
     impl PlantCareSystem
     {
-        pub fn checkUpdatePlants(&mut self)
+        pub fn check_update_plants(&mut self)
         {
             self.plant_controller.update_plants();
         }
@@ -40,9 +40,9 @@ pub mod PlantCareSystem
             // });
         }
 
-        pub fn addPlant(&mut self, plant : Plant)
+        pub fn add_plant(&mut self, plant : Plant)
         {
-            self.plant_controller.addPlant(plant);
+            self.plant_controller.add_plant(plant);
         }
 
         pub fn new() -> PlantCareSystem

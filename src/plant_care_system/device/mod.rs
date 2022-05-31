@@ -1,3 +1,4 @@
+#[allow(dead_code, unused_variables, unused_assignments, unused_imports)]
 #[derive(PartialEq)]
 pub enum State 
     {

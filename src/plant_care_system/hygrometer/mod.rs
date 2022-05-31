@@ -13,7 +13,7 @@ pub struct Hygrometer
 
 impl Hygrometer
 {
-    pub fn newReading(&mut self)
+    pub fn new_reading(&mut self)
     {
         // PENDING: gpio code goes here
         let mut rng = rand::thread_rng();

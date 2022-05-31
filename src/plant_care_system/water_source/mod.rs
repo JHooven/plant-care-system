@@ -1,6 +1,7 @@
 
-use super::device::Device;
-use super::device::State;
+pub use super::device::Device;
+pub use super::device::State;
+mod unit_tests;
 
 pub struct WaterSource
 {
@@ -22,8 +23,7 @@ impl Device for WaterSource
     
     fn state(&self) -> State
     {
-       // PENDING:
-       State::Off
+       self._state
     }
 }
 

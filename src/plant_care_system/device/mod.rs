@@ -2,7 +2,8 @@
 
 #[derive(PartialEq)]
 #[derive(Debug)]
-
+#[derive(Clone)]
+#[derive(Copy)]
 pub enum State 
     {
         Unknown,
@@ -17,4 +18,5 @@ pub trait Device
     fn turn_on(&mut self);
     fn turn_off(&mut self);
     fn state(&self) -> State;
+    
 }

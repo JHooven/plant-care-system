@@ -27,3 +27,10 @@ impl Device for WaterSource
     }
 }
 
+impl WaterSource
+{
+    pub fn new() -> WaterSource
+    {
+         WaterSource { _state: State::Off }
+    }
+}

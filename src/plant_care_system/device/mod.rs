@@ -1,5 +1,8 @@
 #[allow(dead_code, unused_variables, unused_assignments, unused_imports)]
+
 #[derive(PartialEq)]
+#[derive(Debug)]
+
 pub enum State 
     {
         Unknown,

@@ -1,5 +1,5 @@
 [package]
-name = "plant-watering-system"
+name = "plant-care-system"
 version = "0.1.0"
 edition = "2021"
 

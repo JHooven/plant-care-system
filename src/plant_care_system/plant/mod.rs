@@ -1,6 +1,7 @@
 
 use super::hygrometer::Hygrometer;
 use super::water_source::WaterSource;
+
 pub struct Plant
 {
     pub name: String,
@@ -20,24 +21,31 @@ impl Plant
     {
         let mut total: f32 = 0.0;
 
-        for hygro in self.hygrometers.iter()
+        for hygro in self.hygrometers.iter_mut()
         {
-            total += hygro.last_value();
+            total += hygro.update_value();
         } 
 
         total / (self.hygrometers.len() as f32)
     }
 
-    pub fn new(_name: String, hygros: Vec<Hygrometer>, _water_sources: Vec<WaterSource> ) -> Plant
+    pub fn new(name: String, hygrometers: Vec<Hygrometer>, water_sources: Vec<WaterSource> ) -> Plant
     {
         Plant
         {
-            name: _name
-            , hygrometers: hygros
-            , water_sources: _water_sources
+              name
+            , hygrometers
+            , water_sources
             , hygro_high_watter_mark: 400.0
             , hygro_low_watter_mark: 100.0
         }
     }
+}
 
+impl PartialEq for Plant 
+{
+    fn eq(&self, other: &Plant) -> bool 
+    {  
+           self.name == other.name
+    }
 }

@@ -8,7 +8,11 @@ use pws::State;
 #[test]
 fn water_source_new_test()
 {
-    let p : pws::WaterSource =  pws::WaterSource::new();
+    let p : pws::WaterSource =  pws::WaterSource
+    {
+          name: "WS_1".to_string()
+        , state: State::Off
+    };
 
     let s : pws::State = p.state();
     
@@ -18,7 +22,11 @@ fn water_source_new_test()
 #[test]
 fn water_source_turn_on_test()
 {
-    let mut p : pws::WaterSource = pws::WaterSource::new();
+    let mut p : pws::WaterSource = pws::WaterSource
+    {
+        name: "WS_1".to_string(),
+        state: State::Off
+    };
 
     let mut s : State = p.state();
     
@@ -34,7 +42,11 @@ fn water_source_turn_on_test()
 #[test]
 fn water_source_turn_off_test()
 {
-    let mut p : pws::WaterSource = pws::WaterSource::new();
+    let mut p : pws::WaterSource = pws::WaterSource
+    {
+          name: "WS_1".to_string()
+        , state: State::Off
+    };
 
     let mut s : State = p.state();
     

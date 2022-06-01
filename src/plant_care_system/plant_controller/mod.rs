@@ -3,6 +3,8 @@ use crate::plant_care_system::device::Device;
 use crate::plant_care_system::device::State;
 use super::plant::Plant;
 
+mod unit_tests;
+
 pub struct PlantController
 {
     plants: Vec<Plant>,   

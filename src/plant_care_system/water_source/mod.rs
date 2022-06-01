@@ -5,7 +5,8 @@ mod unit_tests;
 
 pub struct WaterSource
 {
-    _state: State,
+    pub name: String,
+    pub state: State,
 }
 
 impl Device for WaterSource
@@ -13,24 +14,24 @@ impl Device for WaterSource
     fn turn_on(&mut self)
     {
         // GPIO code goes here
-        self._state = State::On;
+        self.state = State::On;
     }
     
     fn turn_off(&mut self)
     {
-        self._state = State::Off;
+        self.state = State::Off;
     }
     
     fn state(&self) -> State
     {
-       self._state
+       self.state
     }
 }
 
 impl WaterSource
 {
-    pub fn new() -> WaterSource
+    pub fn new(name: String) -> WaterSource
     {
-         WaterSource { _state: State::Off }
+         WaterSource {name, state: State::Off }
     }
 }

@@ -28,10 +28,11 @@ impl PlantController
         {
             println!("Checking plant: {}", plant.name());
 
+            let hygro_avg : f32 =  plant.hygro_avg();
             // Check if the plant needs watering
-            if plant.hygro_avg() <= plant.hygro_low_watter_mark
+            if hygro_avg <= plant.hygro_low_watter_mark
             {
-                println!("Plant: {} hygro_avg: {} is below the low water mark.", plant.name(), plant.hygro_avg());
+                println!("Plant: {} hygro_avg: {} is below the low water mark.", plant.name(), hygro_avg);
                 
                 for water_source in plant.water_sources.iter_mut()
                 {
@@ -41,9 +42,9 @@ impl PlantController
                     }
                 }
             }
-            else if plant.hygro_avg() >= plant.hygro_high_watter_mark
+            else if hygro_avg >= plant.hygro_high_watter_mark
             {
-                println!("Plant: {} hygro_avg: {} is below the high water mark.", plant.name(), plant.hygro_avg());
+                println!("Plant: {} hygro_avg: {} is below the high water mark.", plant.name(), hygro_avg);
 
                 for water_source in plant.water_sources.iter_mut()
                 {

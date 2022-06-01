@@ -16,13 +16,13 @@ impl Plant
     pub fn name(&self) -> &String {&self.name}
     pub fn hygrometers(&self) -> &Vec<Hygrometer> {&self.hygrometers}
     pub fn water_sources(&self) -> &Vec<WaterSource> {&self.water_sources}
-    pub fn hygro_avg(&self) -> f32 
+    pub fn hygro_avg(&mut self) -> f32 
     {
         let mut total: f32 = 0.0;
 
         for hygro in self.hygrometers.iter()
         {
-            total += hygro.reading();
+            total += hygro.last_value();
         } 
 
         total / (self.hygrometers.len() as f32)

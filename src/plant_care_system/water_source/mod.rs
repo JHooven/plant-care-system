@@ -1,8 +1,16 @@
 
 pub use super::device::Device;
 pub use super::device::State;
+
+extern crate serde;
+extern crate serde_json;
+
 mod unit_tests;
 
+use serde::{Serialize, Deserialize};
+
+//WaterSource
+#[derive(Serialize, Deserialize)]
 pub struct WaterSource
 {
     pub name: String,

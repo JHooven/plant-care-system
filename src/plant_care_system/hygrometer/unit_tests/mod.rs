@@ -1,20 +1,21 @@
+
 #[cfg(test)]
+
+extern crate serde;
+extern crate serde_json;
+
+use serde::{Serialize, Deserialize};
 
 use crate::plant_care_system;
 use crate::plant_care_system::hygrometer as hyg;
+use crate::plant_care_system::hygrometer::Hygrometer;
 use hyg::Device;
 use hyg::State;
 
 #[test]
 fn hydrometer_new_test()
 {
-    let hygro : hyg::Hygrometer =  hyg::Hygrometer
-    {
-        name: "Hygro_1".to_string()
-        , last_reading: 0.0
-        , is_on: false
-        , state: State::Off
-    };
+    let hygro : hyg::Hygrometer = hyg::Hygrometer::new("Hygro_1".to_string());
 
     let s : hyg::State = hygro.state();
     
@@ -68,3 +69,20 @@ fn hygrometer_update_value_test()
     assert_ne!(hygro.update_value(), 0.0);
     dbg!("new hygro.value(): {}", hygro.last_value());
 }   
+
+#[test]
+fn hygrometer_serialization_test()
+{
+    let mut hygro1 = hyg::Hygrometer::new("Hygro_1".to_string());
+
+    assert_ne!(hygro1.update_value(), 0.0);
+
+    let serialized = serde_json::to_string(&hygro1).unwrap();
+
+    dbg!("hygro json: {}", &serialized);
+
+    let hygro2: Hygrometer = serde_json::from_str(&serialized.to_string()).unwrap();
+
+    assert_eq!(hygro1.last_reading, hygro2.last_reading);
+    
+}

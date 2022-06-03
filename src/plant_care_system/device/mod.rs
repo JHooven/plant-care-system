@@ -1,9 +1,11 @@
+extern crate serde;
+extern crate serde_json;
+
+use serde::{Serialize, Deserialize};
+
 #[allow(dead_code, unused_variables, unused_assignments, unused_imports)]
 
-#[derive(PartialEq)]
-#[derive(Debug)]
-#[derive(Clone)]
-#[derive(Copy)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, Copy)]
 pub enum State 
     {
         Unknown,

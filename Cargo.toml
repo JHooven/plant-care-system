@@ -10,3 +10,5 @@ edition = "2021"
 rand = "0.7.3"
 timer = "0.2.0"
 chrono = "0.4.19"
+serde = { version = "1.0.81", features = ["derive"] }
+serde_json = "1.0.81"

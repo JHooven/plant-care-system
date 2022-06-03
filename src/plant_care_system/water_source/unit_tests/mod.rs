@@ -2,6 +2,7 @@
 
 use crate::plant_care_system;
 use crate::plant_care_system::water_source as pws;
+use crate::plant_care_system::water_source::WaterSource;
 use pws::Device;
 use pws::State;
 
@@ -63,4 +64,22 @@ fn water_source_turn_off_test()
     s = p.state();
     
     assert_eq!(s, State::Off);
+}
+
+#[test]
+fn water_source_serialization_test()
+{
+    let mut ws1 = pws::WaterSource::new("Water_1".to_string());
+
+    ws1.turn_on();
+    assert_eq!(ws1.state(), State::On);
+
+    let serialized = serde_json::to_string(&ws1).unwrap();
+
+    dbg!("ws1 json: {}", &serialized);
+
+    let ws2: WaterSource = serde_json::from_str(&serialized.to_string()).unwrap();
+
+    assert_eq!(ws1.state(), ws2.state());
+    
 }

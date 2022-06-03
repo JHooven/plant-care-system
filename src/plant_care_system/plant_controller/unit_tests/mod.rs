@@ -16,42 +16,20 @@ fn plant_controller_hygro_avg_test()
 {
     // Instantiate a PlantController
     let mut pctl : plc::PlantController = plc::PlantController::new();
-
-    // Instantiate a Hygrometers Vec for constructing the Plant
-    let mut hygros : Vec<Hygrometer> = Vec::<Hygrometer>::new();
     
     // Instantiate a Hygrometer for the hygros Vec 
-    let hygro : Hygrometer = Hygrometer
-    {
-          name: "Plant_1".to_string()
-        , last_reading: 0.0
-        , is_on: false
-        , state: State::Off
-    };
-
-    hygros.push(hygro);
+    //let hygro : Hygrometer = Hygrometer::new(name: "Plant_1".to_string());
+    let hygro : Hygrometer = Hygrometer::new("Plant_1".to_string());
     
-    // Instantiate a WaterSources Vec for constructing the Plant
-    let mut water_srcs : Vec<WaterSource> = Vec::<WaterSource>::new();
-
     // Instantiate a WaterSource for the water_srcs Vec
-    let water_src  = WaterSource
-    {
-          name: "WS_1".to_string()
-        , state: State::Off
-    };
-
-    water_srcs.push(water_src);
-
+    let water_src  = WaterSource::new("WS_1".to_string());
+   
     // Instantiate the Plant!!!
-    let plant = Plant
-    {
-         name: "Hooville Plant Controller 1".to_string()
-        , hygrometers: hygros
-        , water_sources: water_srcs
-        , hygro_high_watter_mark: 400.0
-        , hygro_low_watter_mark: 25.0
-    };
+    let mut plant = Plant::new("Hooville Plant Controller 1".to_string());
+
+    plant.hygrometers.push(hygro);
+
+    plant.water_sources.push(water_src);
 
     // Add the Plant to the PlantController
     pctl.add_plant(plant);
@@ -60,7 +38,7 @@ fn plant_controller_hygro_avg_test()
     let _name: &String = &pctl.plants[0].name;
 
     // Check it.
-    assert_eq!(_name, "Hooville Plant Controller 1");
+    assert_eq!(_name, &"Hooville Plant Controller 1".to_string());
 
     // Update outputs for all plant devices (Hygrometers, WaterSources, etc...)
     pctl.update_plants();

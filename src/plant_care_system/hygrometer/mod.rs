@@ -2,14 +2,19 @@ extern crate rand;
 extern crate timer;
 extern crate chrono;
 
-pub use super::device::Device;
-pub use super::device::State;
+extern crate serde;
+extern crate serde_json;
 
 mod unit_tests;
+
+use serde::{Serialize, Deserialize};
+pub use super::device::Device;
+pub use super::device::State;
 
 use rand::{Rng};
 
 //Hygrometer
+#[derive(Serialize, Deserialize)]
 pub struct Hygrometer
 {
     pub name : String,
@@ -53,8 +58,8 @@ impl Hygrometer
         self.last_reading
     }
 
-    pub fn new(_name : String) -> Hygrometer
+    pub fn new(name : String) -> Hygrometer
     {
-        Hygrometer { name: _name, last_reading: 0.0, is_on: false, state: State::Off}
+        Hygrometer { name: name, last_reading: 0.0, is_on: false, state: State::Off}
     }
 }

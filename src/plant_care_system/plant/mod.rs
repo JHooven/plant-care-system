@@ -2,6 +2,8 @@
 use super::hygrometer::Hygrometer;
 use super::water_source::WaterSource;
 
+mod tests;
+
 pub struct Plant
 {
     pub name: String,
@@ -29,16 +31,23 @@ impl Plant
         total / (self.hygrometers.len() as f32)
     }
 
-    pub fn new(name: String, hygrometers: Vec<Hygrometer>, water_sources: Vec<WaterSource> ) -> Plant
+    pub fn new
+    (
+          name: String
+    ) -> Plant
     {
+        let hygrometers = Vec::<Hygrometer>::new();
+        
+        let water_sources = Vec::<WaterSource>::new();
+
         Plant
-        {
+        { 
               name
             , hygrometers
             , water_sources
+            , hygro_low_watter_mark: 0.0
             , hygro_high_watter_mark: 400.0
-            , hygro_low_watter_mark: 100.0
-        }
+       }
     }
 }
 

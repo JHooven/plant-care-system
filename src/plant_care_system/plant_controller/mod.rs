@@ -38,7 +38,7 @@ impl PlantController
                 
                 for water_source in plant.water_sources.iter_mut()
                 {
-                    if water_source.state() != State::Off
+                    if water_source.state() == State::Off
                     {
                          water_source.turn_on();
                     }
@@ -46,11 +46,11 @@ impl PlantController
             }
             else if hygro_avg >= plant.hygro_high_watter_mark
             {
-                println!("Plant: {} hygro_avg: {} is below the high water mark.", plant.name(), hygro_avg);
+                println!("Plant: {} hygro_avg: {} is greater than the high water mark.", plant.name(), hygro_avg);
 
                 for water_source in plant.water_sources.iter_mut()
                 {
-                    if water_source.state() != State::On
+                    if water_source.state() == State::On
                     {
                         water_source.turn_off();
                     }

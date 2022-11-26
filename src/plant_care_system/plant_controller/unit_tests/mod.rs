@@ -18,14 +18,13 @@ fn plant_controller_hygro_avg_test()
     let mut pctl : plc::PlantController = plc::PlantController::new();
     
     // Instantiate a Hygrometer for the hygros Vec 
-    //let hygro : Hygrometer = Hygrometer::new(name: "Plant_1".to_string());
     let hygro : Hygrometer = Hygrometer::new("Plant_1".to_string());
     
     // Instantiate a WaterSource for the water_srcs Vec
     let water_src  = WaterSource::new("WS_1".to_string());
    
     // Instantiate the Plant!!!
-    let mut plant = Plant::new("Hooville Plant Controller 1".to_string());
+    let mut plant = Plant::new("Hooville Plant 1".to_string());
 
     plant.hygrometers.push(hygro);
 
@@ -38,7 +37,7 @@ fn plant_controller_hygro_avg_test()
     let _name: &String = &pctl.plants[0].name;
 
     // Check it.
-    assert_eq!(_name, &"Hooville Plant Controller 1".to_string());
+    assert_eq!(_name, &"Hooville Plant 1".to_string());
 
     // Update outputs for all plant devices (Hygrometers, WaterSources, etc...)
     pctl.update_plants();
